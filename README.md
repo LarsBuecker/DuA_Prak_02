@@ -18,14 +18,13 @@ DuA Praktikum - Aufgabe 2
 
  ## How to Test
  ### Manueller Test:
- Der Manuelle Test läuft einmal durch alle Commandos in `test.txt` und gibt das ergebnis auf der Konosle aus. 
+ Der Manuelle Test läuft einmal durch alle Commandos in `test.txt` und gibt das ergebnis auf der Konosle aus. <br/>
  <br/>
 
  Kommando: <br/>
  `python main.py -avl test.txt`
  ### Automatisierter Test:
  Der Automatisierte Test läuft durch alle Testfiles in `pubInst/` und gibt aus wie viele Test fehlerfrei sind. <br/>
- -> TODO: Ausgabe welche Test an welcher Stelle nicht funktionieren.
  <br/>
 
  Kommando: <br/>
