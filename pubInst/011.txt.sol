@@ -1,0 +1,10 @@
+ins true
+ins true
+ins true
+search false
+del false
+search false
+del false
+ins true
+search false
+ins true

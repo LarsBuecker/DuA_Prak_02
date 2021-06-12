@@ -1,0 +1,21 @@
+# list of 20 random operations with string arguments of length 1,...,3, seed=2
+ins acc
+ins ac
+ins ac
+ins ab
+ins cbb
+del aa
+del cca
+search acb
+search cbc
+search cac
+ins baa
+ins cab
+del cba
+search cb
+del aca
+search abb
+ins bb
+search cac
+ins bba
+search bcc

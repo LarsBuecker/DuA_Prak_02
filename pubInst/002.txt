@@ -1,0 +1,21 @@
+# list of 20 random operations with string arguments of length 1,...,1, seed=18
+ins b
+ins a
+ins c
+ins a
+ins c
+search b
+del a
+search c
+search b
+ins b
+ins b
+search b
+ins a
+del a
+del c
+del a
+del b
+ins b
+ins c
+del c
