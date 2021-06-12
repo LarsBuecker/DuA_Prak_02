@@ -4,6 +4,9 @@ ins c
 ins c
 ins b
 ins c
+ins d
+ins d
+ins a
 search c
 search c
 del a

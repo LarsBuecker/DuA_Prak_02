@@ -20,6 +20,9 @@ class AVL_Tree():
         y.left_child = x
         x.right_child = T
 
+        x.height = 1 + max(self.getHeight(x.left_child), self.getHeight(x.right_child))
+        y.height = 1 + max(self.getHeight(y.left_child), self.getHeight(y.right_child))
+
         return y
 
     def right_rot(self, x):
@@ -29,15 +32,18 @@ class AVL_Tree():
         y.right_child = x
         x.left_child = T
 
+        x.height = 1 + max(self.getHeight(x.left_child), self.getHeight(x.right_child))
+        y.height = 1 + max(self.getHeight(y.left_child), self.getHeight(y.right_child))
+
         return y
     
     def balance(self, root):
         if self.getHeight(root.left_child) > self.getHeight(root.right_child) + 1:
-            if root.left_child.left_child.height < root.right_child.left_child.height:
+            if self.getHeight(root.left_child.left_child) < self.getHeight(root.right_child.left_child):
                 self.left_rot(root.right_child)
             self.right_rot(root)
         elif self.getHeight(root.right_child) > self.getHeight(root.left_child) + 1:
-            if self.getHeight(root.right_child.right_child) < self.getHeight(root.right_child.height.left_child):
+            if self.getHeight(root.right_child.right_child) < self.getHeight(root.right_child.left_child):
                 self.right_rot(root.right_child)
             self.left_rot(root)
 
@@ -87,7 +93,7 @@ if __name__ == "__main__":
 
     for c in command_buffer:
         if c[0] == "ins":
-            print(c[1])
+            #print(c[1])
             root = AVL_tree.insert(root, c[1])
             if not root:
                 print("ins false")
