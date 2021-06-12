@@ -20,6 +20,6 @@ DuA Praktikum - Aufgabe 2
  Der Manuelle Test läuft einmal durch alle Commandos in `test.txt` und gibt das ergebnis auf der Konosle aus.
  `python main.py -avl test.txt`
  ### Automatisierter Test:
- Der Automatisierte Test läuft durch alle Testfiles in `pubInst/` und gibt aus wie viele Test fehlerfrei sind.
+ Der Automatisierte Test läuft durch alle Testfiles in `pubInst/` und gibt aus wie viele Test fehlerfrei sind. \n
  -> TODO: Ausgabe welche Test an welcher Stelle nicht funktionieren.
  `python test.main.py`
