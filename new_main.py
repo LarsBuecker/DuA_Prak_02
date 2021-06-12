@@ -1,16 +1,11 @@
-# AVL tree implementation in Python
-
-
 import sys
 
-# Create a tree node
-class TreeNode(object):
+class Node(object):
     def __init__(self, key):
         self.key = key
         self.left = None
         self.right = None
         self.height = 1
-
 
 class AVLTree(object):
 
@@ -19,7 +14,11 @@ class AVLTree(object):
 
         # Find the correct location and insert the node
         if not root:
-            return TreeNode(key)
+            print("ins true")
+            return Node(key)
+        elif key == root.key:
+            print("ins false")
+            pass
         elif key < root.key:
             root.left = self.insert_node(root.left, key)
         else:
@@ -39,55 +38,6 @@ class AVLTree(object):
 
         if balanceFactor < -1:
             if key > root.right.key:
-                return self.leftRotate(root)
-            else:
-                root.right = self.rightRotate(root.right)
-                return self.leftRotate(root)
-
-        return root
-
-    # Function to delete a node
-    def delete_node(self, root, key):
-
-        # Find the node to be deleted and remove it
-        if not root:
-            return root
-        elif key < root.key:
-            root.left = self.delete_node(root.left, key)
-        elif key > root.key:
-            root.right = self.delete_node(root.right, key)
-        else:
-            if root.left is None:
-                temp = root.right
-                root = None
-                return temp
-            elif root.right is None:
-                temp = root.left
-                root = None
-                return temp
-            temp = self.getMinValueNode(root.right)
-            root.key = temp.key
-            root.right = self.delete_node(root.right,
-                                          temp.key)
-            
-        if root is None:
-            return root
-
-        # Update the balance factor of nodes
-        root.height = 1 + max(self.getHeight(root.left),
-                              self.getHeight(root.right))
-
-        balanceFactor = self.getBalance(root)
-
-        # Balance the tree
-        if balanceFactor > 1:
-            if self.getBalance(root.left) >= 0:
-                return self.rightRotate(root)
-            else:
-                root.left = self.leftRotate(root.left)
-                return self.rightRotate(root)
-        if balanceFactor < -1:
-            if self.getBalance(root.right) <= 0:
                 return self.leftRotate(root)
             else:
                 root.right = self.rightRotate(root.right)
@@ -157,13 +107,46 @@ class AVLTree(object):
             self.printHelper(currPtr.right, indent, True)
 
 
-myTree = AVLTree()
-root = None
-nums = [33, 13, 52, 9, 21, 61, 8, 11]
-for num in nums:
-    root = myTree.insert_node(root, num)
-myTree.printHelper(root, "", True)
-key = 13
-root = myTree.delete_node(root, key)
-print("After Deletion: ")
-myTree.printHelper(root, "", True)
+
+
+def read_file():
+    command_buffer = []
+    file = open(sys.argv[ len(sys.argv) - 1 ], "r")
+    for line in file:
+        tokens = line.split(" ")
+        if tokens[0] == "#":
+            continue
+        entry = tokens[1]
+        entry = entry[:-1]
+        command_buffer.append((tokens[0], entry))
+    print("Commandbuffer: " + str(command_buffer))
+    file.close()
+    
+    return command_buffer
+
+if __name__ == "__main__":
+    if sys.argv[1] == "-avl":
+        mode = "avl"
+    elif sys.argv[1] == "-hash":
+        mode = "hash"
+    else:
+        print("Undefinded mode use -avl or -hash")
+
+    command_buffer = read_file()
+    AVL_tree = AVLTree()
+    root = None
+
+    nums = [33, 13, 52, 9, 21, 61, 8, 11, 33, 13]
+    for num in nums:
+        root = AVL_tree.insert_node(root, num)
+    '''
+    for c in command_buffer:
+        if c[0] == "ins":
+            root = AVL_tree.insert_node(root, c[1])
+            
+            if not root:
+                print("ins false")
+            else:
+                print("ins true")
+    '''
+    AVL_tree.printHelper(root, "", True)
