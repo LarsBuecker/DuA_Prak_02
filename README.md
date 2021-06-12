@@ -13,3 +13,4 @@ DuA Praktikum - Aufgabe 2
     -> "del true", falls Zeile erfolgreich gelöscht wurde
     -> "search false", falls zu suchende Zahl nicht gefunden wurde
     -> "search true", falls zu suchende Zahl gefunden wurde
+ - Ausgabe auf Konsole

@@ -4,12 +4,12 @@ import sys
 mode = None
 
 class Node(object):
-    def __init__(self, key, parent, left_child, right_child, height):
+    def __init__(self, parent, key):
         self.key = key
         self.parent = parent
-        self.left_child = left_child
-        self.right_child = right_child
-        self.height = height
+        self.left_child = None
+        self.right_child = None
+        self.height = None
             
 class AVL_Tree(object):
     
@@ -41,6 +41,18 @@ class AVL_Tree(object):
                 right_rot(root.right_child)
             left_rot(root)
 
+    def insert(self, root, key):
+        if not root:
+            return Node(root, key)
+        elif key < root.key:
+            root.left_child = self.insert(root.left_child, key)
+        elif key > root.key:
+            root.right_child = self.insert(root.right_child, key)
+        elif root.key == key:
+            return
+        root.height = 1 + max(self.root.left_child.height, self.root.right_child.height)
+        balance(root)
+
 def read_file():
     command_buffer = []
     file = open(sys.argv[ len(sys.argv) - 1 ], "r")
@@ -50,9 +62,8 @@ def read_file():
             continue
         command_buffer.append((tokens[0], tokens[1]))
     print("Commandbuffer: " + str(command_buffer))
-
-    #Node.left_rot(T, x)
-
+    file.close()
+    
     return command_buffer
 
 if __name__ == "__main__":
@@ -63,4 +74,14 @@ if __name__ == "__main__":
     else:
         print("Undefinded mode use -avl or -hash")
 
-    read_file()
+    command_buffer = read_file()
+    AVL_tree = AVL_Tree()
+    root = None
+
+    for c in command_buffer:
+        if c[0] == "ins":
+            if not AVL_tree.insert(root, c[1]):
+                print("ins false")
+            else:
+                print("ins true")
+            
