@@ -117,6 +117,43 @@ class AVL_Tree():
                 return self.left_rot(root)
         return root
     
+    def search(self, root, key):
+        if not root:
+            return root
+        if key == root.key:
+            print("search true")
+            return root
+        elif key < root.key:
+            self.search(root.left_child, key)
+        elif key > root.key:
+            self.search(root.right_child, key)
+        elif not root:
+            print("search false")
+            return root
+
+
+        if root is None:
+            return root
+        
+        root.height = 1 + max(self.getHeight(root.left_child),
+                              self.getHeight(root.right_child))
+
+        balance = self.balance(root)
+
+        if balance > 1: 
+            if self.balance(root.left_child) >= 0:
+                return self.right_rot(root)
+            else:
+                root.left = self.left_rot(root.left_child)
+                return self.right_rot(root)
+        if balance < -1:
+            if self.balance(root.right_child) <= 0:
+                return self.left_rot(root)
+            else:
+                root.right_child = self.right_rot(root.right_child)
+                return self.left_rot(root)
+        return root
+
     def getHeight(self, root):
         if not root:
             return 0
@@ -159,4 +196,6 @@ if __name__ == "__main__":
             root = AVL_tree.insert(root, c[1])
         if c[0] == "del":
             root = AVL_tree.delete(root, c[1])
+        if c[0] == "search":
+            root = AVL_tree.search(root, c[1])
             
