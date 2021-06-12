@@ -3,6 +3,7 @@ DuA Praktikum - Aufgabe 2
 
 ## Requirements
  - Ersten Argument [-avl, -hash] gibt die Datenstruktur die benutzt werden soll an
+ - Letztes Argument entspricht file_name
  - Wörterbuch mit Befehlen[ins, del, search] aus datei einlesen
  - Erste zeile beginnt mit '#' und ist ein Kommentar
  - Ausgabe eine Zeile pro durchgeführte Operation
