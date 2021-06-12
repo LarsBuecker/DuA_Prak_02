@@ -3,7 +3,7 @@ import sys
 
 mode = None
 
-class Node(object):
+class Node():
     def __init__(self, parent, key):
         self.key = key
         self.parent = parent
@@ -11,7 +11,7 @@ class Node(object):
         self.right_child = None
         self.height = None
             
-class AVL_Tree(object):
+class AVL_Tree():
     
     def left_rot(self, x):
         y = x.right_child
@@ -32,19 +32,20 @@ class AVL_Tree(object):
         return y
     
     def balance(self, root):
-        if root.left_child.height > root.right_child.height + 1:
+        if self.getHeight(root.left_child) > self.getHeight(root.right_child) + 1:
             if root.left_child.left_child.height < root.right_child.left_child.height:
-                left_rot(root.right_child)
-            right_rot(root)
-        elif root.right_child.height > root.left_child.height + 1:
-            if root.right_child.right_child.height < root.right_child.height.left_child.height:
-                right_rot(root.right_child)
-            left_rot(root)
+                self.left_rot(root.right_child)
+            self.right_rot(root)
+        elif self.getHeight(root.right_child) > self.getHeight(root.left_child) + 1:
+            if self.getHeight(root.right_child.right_child) < self.getHeight(root.right_child.height.left_child):
+                self.right_rot(root.right_child)
+            self.left_rot(root)
 
     def insert(self, root, key):
         if not root:
             return Node(root, key)
         elif key < root.key:
+<<<<<<< Updated upstream
             root.left_child = self.insert(root.left_child, key)
         elif key > root.key:
             root.right_child = self.insert(root.right_child, key)
@@ -52,6 +53,20 @@ class AVL_Tree(object):
             return
         root.height = 1 + max(self.root.left_child.height, self.root.right_child.height)
         balance(root)
+=======
+            self.insert(root.left_child, key)
+        elif key > root.key:
+            self.insert(root.right_child, key)
+        else:
+            return
+        root.height = 1 + max(self.getHeight(root.left_child), self.getHeight(root.right_child))
+        self.balance(root)
+    
+    def getHeight(self, root):
+        if not root:
+            return 0
+        return root.height
+>>>>>>> Stashed changes
 
 def read_file():
     command_buffer = []
@@ -80,7 +95,13 @@ if __name__ == "__main__":
 
     for c in command_buffer:
         if c[0] == "ins":
+<<<<<<< Updated upstream
             if not AVL_tree.insert(root, c[1]):
+=======
+            print(c[1])
+            root = AVL_tree.insert(root, c[1])
+            if not root:
+>>>>>>> Stashed changes
                 print("ins false")
             else:
                 print("ins true")
