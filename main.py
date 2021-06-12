@@ -119,6 +119,7 @@ class AVL_Tree():
     
     def search(self, root, key):
         if not root:
+            print("search false")
             return root
         if key == root.key:
             print("search true")
@@ -127,10 +128,6 @@ class AVL_Tree():
             self.search(root.left_child, key)
         elif key > root.key:
             self.search(root.right_child, key)
-        elif not root:
-            print("search false")
-            return root
-
 
         if root is None:
             return root
