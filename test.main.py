@@ -19,8 +19,10 @@ for i in range(1, 15):
     output.close()
     sol.close()
     
+    
     c_ok = 0
     for j in range(0, len(sol_line) - 1):
+        #assert sol_line[j] == out_line[j], "Output is not identical with the solution at file: " + str(i) + " line: " + str(j)
         if sol_line[j] == out_line[j]:
             c_ok += 1
         else:
@@ -28,6 +30,5 @@ for i in range(1, 15):
     if c_ok == len(sol_line) - 1:
         t_ok += 1
 
-print(str(t_ok) + " of 15 Test where OK")
-        #assert sol_line[j] == out_line[j], "Output is not identical with the solution at file: " + str(i) + " line: " + str(j)
+print(str(t_ok + 1) + " of 15 Test where OK")
     

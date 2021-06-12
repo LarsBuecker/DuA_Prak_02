@@ -80,19 +80,18 @@ class AVL_Tree():
         elif key > root.key:
             root.right_child = self.delete(root.right_child, key)
         else:
-            print("del true")
             if root.left_child is None:
+                print("del true")
                 tmp = root.right_child
                 root = None
                 return tmp
             elif root.right_child is None:
+                print("del true")
                 tmp = root.left_child
                 root = None
                 return tmp
-            
             tmp = self.getMinValueNode(root.right_child)
             root.key = tmp.key
-            
             root.right_child = self.delete(root.right_child, tmp.key)
             
 
@@ -161,6 +160,22 @@ class AVL_Tree():
         if root is None or root.left_child is None:
             return root
         return self.getMinValueNode(root.left_child)
+
+class Hashtable():
+    # http://blog.chapagain.com.np/hash-table-implementation-in-python-data-structures-algorithms/
+    def __init__(self, size):
+        self.size = size
+
+    def insert(self, key):
+        hash_key = hash(key) % self.size
+        key_exists = False
+        
+
+    def delete(self, key):
+        pass
+
+    def search(self, key):
+        pass
 
 def read_file():
     command_buffer = []
