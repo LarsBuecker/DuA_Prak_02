@@ -89,6 +89,7 @@ class AVL_Tree():
                 tmp = root.left_child
                 root = None
                 return tmp
+            
             tmp = self.getMinValueNode(root.right_child)
             root.key = tmp.key
             
@@ -171,7 +172,7 @@ def read_file():
         entry = tokens[1]
         entry = entry[:-1]
         command_buffer.append((tokens[0], entry))
-    print("Commandbuffer: " + str(command_buffer))
+    #print("Commandbuffer: " + str(command_buffer))
     file.close()
     
     return command_buffer
@@ -188,11 +189,20 @@ if __name__ == "__main__":
     AVL_tree = AVL_Tree()
     root = None
 
-    for c in command_buffer:
-        if c[0] == "ins":
-            root = AVL_tree.insert(root, c[1])
-        if c[0] == "del":
-            root = AVL_tree.delete(root, c[1])
-        if c[0] == "search":
-            root = AVL_tree.search(root, c[1])
+    if mode == "avl":
+        for c in command_buffer:
+            if c[0] == "ins":
+                root = AVL_tree.insert(root, c[1])
+            if c[0] == "del":
+                root = AVL_tree.delete(root, c[1])
+            if c[0] == "search":
+                root = AVL_tree.search(root, c[1])
+    else:
+        for c in command_buffer:
+            if c[0] == "ins":
+                pass
+            if c[0] == "del":
+                pass
+            if c[0] == "search":
+                pass
             
