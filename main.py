@@ -45,15 +45,6 @@ class AVL_Tree():
         if not root:
             return Node(root, key)
         elif key < root.key:
-<<<<<<< Updated upstream
-            root.left_child = self.insert(root.left_child, key)
-        elif key > root.key:
-            root.right_child = self.insert(root.right_child, key)
-        elif root.key == key:
-            return
-        root.height = 1 + max(self.root.left_child.height, self.root.right_child.height)
-        balance(root)
-=======
             self.insert(root.left_child, key)
         elif key > root.key:
             self.insert(root.right_child, key)
@@ -66,7 +57,6 @@ class AVL_Tree():
         if not root:
             return 0
         return root.height
->>>>>>> Stashed changes
 
 def read_file():
     command_buffer = []
@@ -75,7 +65,9 @@ def read_file():
         tokens = line.split(" ")
         if tokens[0] == "#":
             continue
-        command_buffer.append((tokens[0], tokens[1]))
+        entry = tokens[1]
+        entry = entry[:-1]
+        command_buffer.append((tokens[0], entry))
     print("Commandbuffer: " + str(command_buffer))
     file.close()
     
@@ -95,13 +87,9 @@ if __name__ == "__main__":
 
     for c in command_buffer:
         if c[0] == "ins":
-<<<<<<< Updated upstream
-            if not AVL_tree.insert(root, c[1]):
-=======
             print(c[1])
             root = AVL_tree.insert(root, c[1])
             if not root:
->>>>>>> Stashed changes
                 print("ins false")
             else:
                 print("ins true")
