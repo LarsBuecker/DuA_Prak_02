@@ -161,22 +161,105 @@ class AVL_Tree():
             return root
         return self.getMinValueNode(root.left_child)
 
+class HashNode():
+    def __init__(self, key):
+        self.key = key
+        self.next = None
+
 class Hashtable():
+    INITIAL_CAPACITY = 50
     # http://blog.chapagain.com.np/hash-table-implementation-in-python-data-structures-algorithms/
-    def __init__(self, size):
-        self.size = size
+    def __init__(self):
+        self.capacity = self.INITIAL_CAPACITY
+        self.size = 0
+        self.buckets = [None] * self.capacity
+
+    def hash(self, key):
+        hashsum = 0
+        for i, c in enumerate(key):
+            hashsum += (i + len(key)) ** ord(c)
+            hashsum = hashsum % self.capacity
+        
+        return hashsum
 
     def insert(self, key):
-        hash_key = hash(key) % self.size
-        key_exists = False
+        # 1. Increment size
+        self.size += 1
+
+        # 2. Compute index of key
+        index = self.hash(key)
+        node = self.buckets[index]
+        
+        # 3. If bucket is empty:
+        if node is None:
+            self.buckets[index] = HashNode(key)
+            print("ins true")
+            return
+
+        
+        # 4. Collision -> Iterate to the end of the linked list at provided index
+        prev = node
+        while node is not None:
+            if key == node.key:
+                print("ins false")
+                return
+            prev = node
+            node = node.next
+
+            # Add new node at the end of the list with provided key
+        print("ins true")
+        prev.next = HashNode(key)
         
 
     def delete(self, key):
-        pass
+        # 1. Compute hash
+        index = self.hash(key)
+        node = self.buckets[index]
+        prev = None
+
+        # 2. Iterate to the requestet node
+        while node is not None and node.key != key:
+            prev = node
+            node = node.next
+        
+        # Node is requestet node or none
+        if node is None:
+            # Key not found
+            print("del false")
+            return None
+        else:
+            # 3. Key was found
+            self.size -= 1
+            # Delete the element in the linked list
+            if prev is None:
+                self.buckets[index] = node.next
+            else:
+                prev.next = prev.next.next
+            
+            print("del true")
+            return key
 
     def search(self, key):
-        pass
+        # 1. Compute hash
+        index = self.hash(key)
 
+        # 2. Go to first node in list at bucket
+        node = self.buckets[index]
+        
+        # 3. Traverse the linked list at this node
+        while node is not None and node.key != key:
+            node = node.next
+        
+        #4. Node is the searched one
+        if node is None:
+            # Not found
+            print("search false")
+            return None
+        else:
+            # Found - return node
+            print("search true")
+            return node
+    
 def read_file():
     command_buffer = []
     file = open(sys.argv[ len(sys.argv) - 1 ], "r")
@@ -201,10 +284,11 @@ if __name__ == "__main__":
         print("Undefinded mode use -avl or -hash")
 
     command_buffer = read_file()
-    AVL_tree = AVL_Tree()
-    root = None
-
+    
     if mode == "avl":
+        AVL_tree = AVL_Tree()
+        root = None
+
         for c in command_buffer:
             if c[0] == "ins":
                 root = AVL_tree.insert(root, c[1])
@@ -213,11 +297,14 @@ if __name__ == "__main__":
             if c[0] == "search":
                 root = AVL_tree.search(root, c[1])
     else:
+        hashtable = Hashtable()
+
         for c in command_buffer:
             if c[0] == "ins":
-                pass
+                hashtable.insert(c[1])
             if c[0] == "del":
-                pass
+                hashtable.delete(c[1])
             if c[0] == "search":
-                pass
+                hashtable.search(c[1])
+
             
