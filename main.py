@@ -168,7 +168,6 @@ class HashNode():
 
 class Hashtable():
     INITIAL_CAPACITY = 50
-    # http://blog.chapagain.com.np/hash-table-implementation-in-python-data-structures-algorithms/
     def __init__(self):
         self.capacity = self.INITIAL_CAPACITY
         self.size = 0
