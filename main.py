@@ -305,5 +305,3 @@ if __name__ == "__main__":
                 hashtable.delete(c[1])
             if c[0] == "search":
                 hashtable.search(c[1])
-
-            

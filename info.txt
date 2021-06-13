@@ -1,0 +1,5 @@
+Autor : bueckerl@campus.uni-paderborn.de 7206195 Bücker, Lars
+Autor : eweiss@campus.uni-paderborn.de 7217485 Weiß, Edgar
+Autor : jennyf@campus.uni-paderborn.de 7104857 Freise, Jennifer
+Compile:
+Run: python3 main.py
