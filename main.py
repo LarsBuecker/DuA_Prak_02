@@ -45,6 +45,7 @@ if __name__ == "__main__":
     command_buffer = read_file()
     
     if mode == "avl":
+        # Run commands from command buffer in avl mode
         AVL_tree = AVL_Tree()
         root = None
 
@@ -56,6 +57,7 @@ if __name__ == "__main__":
             if c[0] == "search":
                 root = AVL_tree.search(root, c[1])
     else:
+        # Run commands from command buffer in hash mode
         hashtable = Hashtable()
         for c in command_buffer:
             if c[0] == "ins":
