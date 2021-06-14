@@ -1,3 +1,5 @@
+# Reprensentation of a node in an avl tree
+# fields: key, left_child, right_child. height
 class Node():
     def __init__(self, key):
         self.key = key
@@ -7,48 +9,65 @@ class Node():
             
 class AVL_Tree():
     
-    def left_rot(self, x):
+    # Perform a left rotation around x as pivot point
+    # Return the new root node of the subtree
+    def left_rot(self, x: Node) -> Node:
         y = x.right_child
         T2 = y.left_child
         y.left_child = x
         x.right_child = T2
+
+        # recalculate heights
         x.height = 1 + max(self.getHeight(x.left_child),
                            self.getHeight(x.right_child))
         y.height = 1 + max(self.getHeight(y.left_child),
                            self.getHeight(y.right_child))
+        
         return y
 
+    # Perfom a right rotation around x as pivot point
+    # Return the new root node of the subtree
     def right_rot(self, x):
         y = x.left_child
         T3 = y.right_child
         y.right_child = x
         x.left_child = T3
+
+        # recalculate heights
         x.height = 1 + max(self.getHeight(x.left_child),
                            self.getHeight(x.right_child))
         y.height = 1 + max(self.getHeight(y.left_child),
                            self.getHeight(y.right_child))
         return y
     
-    def balance(self, root):
+    # calculates and returns the balance factor of the tree
+    def balance(self, root) -> int:
         if not root:
             return 0
         return self.getHeight(root.left_child) - self.getHeight(root.right_child)
 
-    def insert(self, root, key):            
+    # inserts a new Node into the tree if the key is not already in the tree
+    def insert(self, root, key):        
         if not root:
+            # The key is not in the tree -> add a new node to the tree
             print("ins true")
             return Node(key)
         elif key == root.key:
+            #The key was found in the tree -> dont add the node
             print("ins false")
             pass
         elif key < root.key:
+            # if the key is less than the key of the current node insert the new node at the left child
             root.left_child = self.insert(root.left_child, key)
         else:
+            # ifthe key is greater than the key of the current node insert the new node at the right child
             root.right_child = self.insert(root.right_child, key)
 
+        # Reset the height of the node of the current recusion depth
         root.height = 1 + max(self.getHeight(root.left_child),
                               self.getHeight(root.right_child))
 
+        # rebalance the tree
         balanceFactor = self.balance(root)
         if balanceFactor > 1:
             if key < root.left_child.key:
